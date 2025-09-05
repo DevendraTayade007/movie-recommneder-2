@@ -42,22 +42,55 @@ def recommend(movie, num_recommendations=5):
         recommended_movies.append(movies.iloc[i[0]].title)
     return recommended_movies
 
-# 🔹 Streamlit UI
-st.title("🎬 Movie Recommender System")
-st.write("Find movies similar to your favorite one!")
+# ============ STREAMLIT UI ============ #
+# 🎨 Page setup
+st.set_page_config(page_title="Movie Recommender 🎬", page_icon="🎥", layout="wide")
 
-selected_movie_name = st.selectbox("🎥 Select a Movie", movies['title'].values)
+# 🎬 Title
+st.markdown(
+    """
+    <h1 style='text-align: center; color: #FF4B4B;'>
+        🎬 Movie Recommender System
+    </h1>
+    <p style='text-align: center; color: #AAAAAA;'>
+        Discover movies similar to your favorites 📽️🍿
+    </p>
+    """,
+    unsafe_allow_html=True
+)
 
-# Dropdown for number of recommendations
-num_recs = st.selectbox("📌 How many recommendations do you want?", list(range(1, 11)), index=4)
+# 🎥 Movie selection
+selected_movie_name = st.selectbox("🔍 Choose a Movie", movies['title'].values)
 
-if st.button("Recommend Movies"):
+# 📌 Dropdown for recommendations
+num_recs = st.selectbox("✨ Number of recommendations", list(range(1, 11)), index=4)
+
+# 🔘 Button
+if st.button("🚀 Recommend"):
     recommendations = recommend(selected_movie_name, num_recs)
 
-    # Display in 3-column layout
+    st.markdown("---")
+    st.subheader("🎯 Top Recommendations")
+
+    # 🎨 Card-like layout
     cols = st.columns(3)
     for idx, movie in enumerate(recommendations):
         poster = fetch_poster(movie)
         with cols[idx % 3]:
-            st.image(poster if poster else "https://via.placeholder.com/200x300?text=No+Poster", width=180)
-            st.markdown(f"**{movie}**")
+            st.markdown(
+                f"""
+                <div style='
+                    background-color: #222;
+                    border-radius: 15px;
+                    padding: 15px;
+                    text-align: center;
+                    box-shadow: 0px 4px 10px rgba(0,0,0,0.4);
+                    margin-bottom: 20px;
+                '>
+                    <img src="{poster if poster else 'https://via.placeholder.com/200x300?text=No+Poster'}" 
+                         style='width: 180px; border-radius: 10px; margin-bottom: 10px;'>
+                    <h4 style='color: #FFDD00;'>{movie}</h4>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
