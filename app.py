@@ -12,7 +12,7 @@ def download_file(file_id, output):
             gdown.download(f"https://drive.google.com/uc?id={file_id}", output, quiet=False)
 
 # 🔹 Download required files
-download_file("1O0SheM_jLssJSRJFWp1O0pdTes7svgGA", "similarity.pkl")  # <-- your similarity.pkl file
+download_file("1_Ku5FTHIldn4CRS9-46ijfhOqWh8l5_M", "similarity.pkl")  # <-- your similarity.pkl file
 download_file("YOUR_MOVIE_DICT_FILE_ID", "movie_dict.pkl")            # <-- add movie_dict.pkl file ID here
 
 # 🔹 Load data
@@ -61,3 +61,4 @@ if st.button("Recommend Movies"):
         with cols[idx % 3]:
             st.image(poster if poster else "https://via.placeholder.com/200x300?text=No+Poster", width=180)
             st.markdown(f"**{movie}**")
+
