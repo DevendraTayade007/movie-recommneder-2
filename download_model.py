@@ -1,7 +1,7 @@
 import gdown
 import os
 
-FILE_ID = "1O0SheM_jLssJSRJFWp1O0pdTes7svgGA"
+FILE_ID = "1_Ku5FTHIldn4CRS9-46ijfhOqWh8l5_M"
 URL = f"https://drive.google.com/uc?id={FILE_ID}"
 OUTPUT = "similarity.pkl"
 
