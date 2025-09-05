@@ -12,8 +12,8 @@ def download_file(file_id, output):
             gdown.download(f"https://drive.google.com/uc?id={file_id}", output, quiet=False)
 
 # 🔹 Download required files
-download_file("1_Ku5FTHIldn4CRS9-46ijfhOqWh8l5_M", "similarity.pkl")  # <-- your similarity.pkl file
-download_file("YOUR_MOVIE_DICT_FILE_ID", "movie_dict.pkl")            # <-- add movie_dict.pkl file ID here
+download_file("1_Ku5FTHIldn4CRS9-46ijfhOqWh8l5_M", "similarity.pkl")
+download_file("YOUR_MOVIE_DICT_FILE_ID", "movie_dict.pkl")
 
 # 🔹 Load data
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
@@ -22,7 +22,7 @@ similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 # 🔹 Fetch poster from OMDb
 def fetch_poster(movie_title):
-    api_key = "a98f5a39"  # <-- your OMDb API key
+    api_key = "a98f5a39"
     url = f"http://www.omdbapi.com/?t={movie_title}&apikey={api_key}"
     response = requests.get(url)
     if response.status_code == 200:
@@ -48,8 +48,8 @@ st.write("Find movies similar to your favorite one!")
 
 selected_movie_name = st.selectbox("🎥 Select a Movie", movies['title'].values)
 
-# Let user choose number of recommendations
-num_recs = st.slider("📌 How many recommendations do you want?", min_value=1, max_value=10, value=5)
+# Dropdown for number of recommendations
+num_recs = st.selectbox("📌 How many recommendations do you want?", list(range(1, 11)), index=4)
 
 if st.button("Recommend Movies"):
     recommendations = recommend(selected_movie_name, num_recs)
@@ -61,4 +61,3 @@ if st.button("Recommend Movies"):
         with cols[idx % 3]:
             st.image(poster if poster else "https://via.placeholder.com/200x300?text=No+Poster", width=180)
             st.markdown(f"**{movie}**")
-
